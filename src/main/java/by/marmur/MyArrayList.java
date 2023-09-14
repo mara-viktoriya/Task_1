@@ -1,6 +1,8 @@
-package by.marmur.aston;
+package by.marmur;
 
 /* Методы:
+
+
 
 
 ○ Java generics ○ Comparable, Comparator.
@@ -10,128 +12,109 @@ package by.marmur.aston;
 
 import java.util.*;
 
-public class MyArrayList<E> implements Iterable {
+public class MyArrayList<E> {
 
-    /*
-    стандартный размер внутреннего массива
+
+    /**
+     * стандартный размер внутреннего массива
      */
     private static final int STANDARD_CAPACITY = 10;
 
-    /*
-    переменная хранит стандартный пустой массив
-    */
-    //private static final Object[] STANDARD_EMPTY_ARRAY = {};
+    /**
+     * пустой массив
+     */
+    private static final Object[] EMPTY_ARRAY = {};
 
-    /*
-    переменная хранит обект - массив
+    /**
+     * переменная хранит обект - массив
      */
     Object[] array;
 
-    /*
-    переменная хранит размер внутреннего массива листа.
+    /**
+     * переменная хранит счетчик количества элементов в листе.
      */
-    private int sizeArray;
-
-    /*
-    переменная хранит счетчик количества элементов в листе.
-    */
     private int countElements = 0;
 
-    /*
-    конструктор1. создается пустой лист
+    /**
+     * конструктор1. создается пустой лист
      */
     public MyArrayList() {
         this.array = new Object[STANDARD_CAPACITY];
-        this.sizeArray = STANDARD_CAPACITY;
     }
 
-    /*
-    конструктор2. создается пустой лист с размером внетреннего массива равного myInitialCapacity.
+    /**
+     * конструктор2. создается пустой лист с размером внетреннего массива равного myInitialCapacity.
      */
     public MyArrayList(int myInitialCapacity) {
         if (myInitialCapacity > 0) {
             this.array = new Object[myInitialCapacity];
-            sizeArray = myInitialCapacity;
         } else if (myInitialCapacity == 0) {
-            this.array = new Object[STANDARD_CAPACITY];
-            this.sizeArray = STANDARD_CAPACITY;
+            this.array = EMPTY_ARRAY;
         } else {
             throw new IllegalArgumentException("Incorrect capacity!");
         }
     }
 
-    /*
-    увеличить размер внутреннего массива. Копирует старый в новый увеличенный массив и присваивает ссылку нового массива в array.
+    /**
+     * увеличить размер внутреннего массива. Копирует старый массив в новый увеличенный массив и присваивает ссылку нового массива в array.
      */
     private void increaseSizeArray() {
-        Object[] copyArray = new Object[this.sizeArray + STANDARD_CAPACITY];
-        if (this.sizeArray >= 0) System.arraycopy(array, 0, copyArray, 0, this.sizeArray);
+        Object[] copyArray = new Object[this.array.length + STANDARD_CAPACITY];
+        System.arraycopy(array, 0, copyArray, 0, this.array.length);
         array = copyArray;
     }
 
-    private void checkCapacity (){
-        if (this.countElements == this.sizeArray){
+    /**
+     * проверить заполнен ли полностью массив. если массив заполнен - вызывает метод increaseSizeArray для увеличения размера массива
+     */
+    private void checkCapacity(int length) {
+        if (this.countElements == length) {
             this.increaseSizeArray();
         }
     }
 
 
-    /*
-    Добавить элемент в конец списка. Проверяет capacity внутреннего массива. Если внутренний массив полностью заполнен, увеличивает его.
-    */
-
+    /**
+     * Добавить элемент в конец списка.
+     */
     public boolean add(E element) {
-        checkCapacity();
+        checkCapacity(array.length);
         array[countElements] = element;
         countElements++;
         return true;
 
     }
 
-    /*
-    Добавить элемент по индексу. смещает остальные элементы на 1 позицию.
-    */
+    /**
+     * Добавить элемент по индексу. смещает остальные элементы на 1 позицию.
+     */
     public void add(E element, int index) {
-
-        if ((index < 0) || (index > (this.countElements + 2))  ) {
-            throw new IndexOutOfBoundsException("Incorrect index!");
-        }
-
-        if (index == this.countElements){
-            checkCapacity();
-            array[index]=element;
-        }
-
-
-        else if (index < this.countElements ) {
-            Object[] copyArray = new Object[this.sizeArray + 1];
-
-            for (int i = 0; i < index; i++) {
-                copyArray[i] = this.array[i];
-            }
+        checkIndex(index);
+        if (index == this.countElements) {
+            checkCapacity(index);
+            array[index] = element;
+            countElements++;
+        } else if (index < this.countElements) {
+            Object[] copyArray = new Object[this.array.length + 1];
+            System.arraycopy(this.array, 0, copyArray, 0, index);
             copyArray[index] = element;
-
-            for (int i = index; i < copyArray.length; i++) {
-                copyArray[i + 1] = this.array[i];
-            }
+            System.arraycopy(this.array, index, copyArray, index + 1, copyArray.length - 1 - index);
+            array = copyArray;
             countElements++;
         }
     }
 
-
-    /*
-    получить элемент
-    */
+    /**
+     * получить элемент по индексу
+     */
     public E get(int index) {
-
-        Objects.checkIndex(index, this.getSize());
+        checkIndex(index);
         return (E) array[index];
     }
 
-    /*
-    заменить элемент по индексу
+    /**
+     * заменить элемент по индексу
      */
-
     public void replaceElement(int index, E element) {
         if (element == null) {
             array[index] = null;
@@ -142,65 +125,111 @@ public class MyArrayList<E> implements Iterable {
         }
     }
 
-    /*
-    удалить элемент
-    */
-    public void removeElement (int index){
+    /**
+     * Удалить элемент по индексу
+     */
+    public E removeElement(int index) {
+        checkIndex(index);
+        E element = (E) this.array[index];
 
+        if (index == (array.length - 1)) {
+            array[index] = null;
+            countElements--;
+        } else {
+            Object[] copyArray = new Object[array.length];
+            System.arraycopy(this.array, 0, copyArray, 0, index);
+            System.arraycopy(this.array, index + 1, copyArray, index, array.length - 1 - index);
+            array = copyArray;
+            countElements--;
+        }
+        return element;
     }
 
-
-    /*
-    отсортировать
+    /**
+     * Отсортировать массив методом быстрой сортировки. Принимает в качестве аргумента объект Comparator
      */
     public void sort(Comparator<? super E> comparator) {
-        Arrays.sort((E[]) array, 0, countElements, comparator);
+        new Quicksort().quickSort((E[]) this.array, 0, this.countElements- 1, comparator);
     }
 
     /*
-    очистить всю коллекцию, колличество ячеек в массиве остается тем же.
+    Проверить валидность индекса листа.
+     */
+    private void checkIndex(int index) {
+        if ((index < 0) || (index > (this.countElements + 2))) {
+            throw new IndexOutOfBoundsException("Incorrect index!");
+        }
+    }
+
+    /**
+     * Очистить всю коллекцию, колличество ячеек в массиве остается тем же.
      */
     public void clear() {
-        for (Object e : this) {
-            e = null;
+        for (int i = 0; i < this.array.length; i++) {
+            this.array[i] = null;
 
+        }
+        countElements = 0;
+    }
+
+
+    /**
+     * получить размер внутреннего массива
+     */
+    private int getSize() {
+        return this.array.length;
+    }
+
+    /**
+     * Получить количество элементов в Листе
+     */
+    public int getCountElements() {
+        return this.countElements;
+    }
+
+
+
+
+
+
+    class Quicksort {
+        public void quickSort(E[] sortArr, int low, int high, Comparator<? super E> comparator) {
+            /*
+             *завершить,если массив пуст или уже нечего делить
+             */
+            if (sortArr.length == 0 || low >= high) return;
+
+            /*
+             *выбор опорного элемента
+             */
+            int middle = low + (high - low) / 2;
+            E border = sortArr[middle];
+            /*
+             *разделить на подмассивы и меняем местами
+             */
+            int i = low, j = high;
+            while (i <= j) {
+                while (comparator.compare(border, sortArr[i]) >= 1) i++;
+
+                while (comparator.compare(border, sortArr[j]) <= (-1)) j--;
+
+                E swap = sortArr[i];
+                sortArr[i] = sortArr[j];
+                sortArr[j] = swap;
+                i++;
+                j--;
+            }
+            /*
+        рекурсия для сортировки левой и правой части
+         */
+            if (low < j) quickSort(sortArr, low, j, comparator);
+            if (high > i) quickSort(sortArr, i, high, comparator);
         }
     }
 
 
-     /*
-    получить размер внутреннего Массива
-    */
-
-    public int getSize() {
-        return this.array.length;
-    }
-
-    /*
-    получить количество элементов в Листе
-     */
-
-    public int getCountElements() {
-        return countElements;
-    }
-
-    /*
-    проверить пустой ли Лист
-    */
-
-    public boolean isEmpty() {
-        return this.getCountElements() == 0;
-    }
-
-    /**
-     * Returns an iterator over elements of type {@code T}.
-     *
-     * @return an Iterator.
-     */
-    @Override
-    public Iterator iterator() {
-        return null;
-    }
-
-
 }
+
+
+
+
