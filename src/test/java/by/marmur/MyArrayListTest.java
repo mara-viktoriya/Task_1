@@ -20,6 +20,7 @@ class MyArrayListTest {
     @Test
     void shouldAdd_NewObject() {
         myArrayList.add("New3", 3);
+
         assertEquals("New3", myArrayList.get(3));
     }
 
@@ -31,18 +32,20 @@ class MyArrayListTest {
     @Test()
     public void shouldThrow_WhenIndexOutOfBounds() {
         assertThrows(IndexOutOfBoundsException.class, () -> myArrayList.get(5));
-
+        assertThrows(IndexOutOfBoundsException.class, () -> myArrayList.get(-1));
     }
 
     @Test
     void testReplaceElement() {
         myArrayList.replaceElement(0, "Next");
+
         assertEquals("Next", myArrayList.get(0));
     }
 
     @Test
     void testRemoveElement() {
         String str = myArrayList.get(0);
+
         assertEquals(str, myArrayList.removeElement(0));
     }
 
@@ -56,6 +59,7 @@ class MyArrayListTest {
     @Test
     void testClear_CheckCountElements() {
         myArrayList.clear();
+
         assertEquals(0, myArrayList.getCountElements());
     }
 
