@@ -1,6 +1,7 @@
 package by.marmur;
 
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class MyArrayList<E> {
@@ -122,7 +123,7 @@ public class MyArrayList<E> {
         }
     }
 
-    /**!! checkIndex
+    /**checkIndex
      * Удалить элемент по индексу
      */
     public E removeElement(int index) {
@@ -151,15 +152,6 @@ public class MyArrayList<E> {
         new Quicksort().quickSort((E[]) this.array, 0, this.countElements- 1, comparator);
     }
 
-    /*
-    Проверить валидность индекса листа.
-     */
-//    private void checkIndex(int index) {
-//        if ((index < 0) || (index > (this.countElements + 1))) {
-//            throw new IndexOutOfBoundsException("Incorrect index!");
-//        }
-//    }
-
     /**
      * Очистить всю коллекцию, колличество ячеек в массиве остается тем же.
      */
@@ -169,7 +161,6 @@ public class MyArrayList<E> {
         }
         countElements = 0;
     }
-
 
     /**
      * получить размер внутреннего массива
@@ -185,6 +176,14 @@ public class MyArrayList<E> {
         return this.countElements;
     }
 
+
+    @Override
+    public String toString() {
+        return "MyArrayList{" +
+                "array=" + Arrays.toString(array) +
+                ", countElements=" + countElements +
+                '}';
+    }
 
     /**
      * Класс с реализацией метода быстрой сортировки
