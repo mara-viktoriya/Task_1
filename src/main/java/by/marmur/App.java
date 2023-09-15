@@ -1,5 +1,7 @@
 package by.marmur;
 
+import java.util.ArrayList;
+
 public class App {
     public static void main(String[] args) {
         MyArrayList<String> strings2 = new MyArrayList<>();
@@ -17,16 +19,6 @@ public class App {
             System.out.print(strings2.get(i)+" ");
 
         }
-
-
-
-
-
-
-
-
-
-
 
     }
 }

@@ -176,15 +176,6 @@ public class MyArrayList<E> {
         return this.countElements;
     }
 
-
-    @Override
-    public String toString() {
-        return "MyArrayList{" +
-                "array=" + Arrays.toString(array) +
-                ", countElements=" + countElements +
-                '}';
-    }
-
     /**
      * Класс с реализацией метода быстрой сортировки
      */
