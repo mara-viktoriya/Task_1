@@ -188,14 +188,14 @@ public class MyArrayList<E> {
             int j = high;
             while (i <= j) {
                 while (comparator.compare(border, sortArr[i]) >= 1) i++;
-
                 while (comparator.compare(border, sortArr[j]) <= (-1)) j--;
-
-                E swap = sortArr[i];
-                sortArr[i] = sortArr[j];
-                sortArr[j] = swap;
-                i++;
-                j--;
+                if (i <= j) {
+                    E swap = sortArr[i];
+                    sortArr[i] = sortArr[j];
+                    sortArr[j] = swap;
+                    i++;
+                    j--;
+                }
             }
             /*
             рекурсия для сортировки левой и правой части
