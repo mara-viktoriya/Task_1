@@ -54,7 +54,8 @@ class MyArrayListTest {
         myArrayList.add("Anna");
         myArrayList.add("Zanna");
         myArrayList.add("Ganna");
-        assertEquals(0, 0);
+        myArrayListTest.clear ();
+        assertEquals(0, myArrayListTest.getCountElements());
     }
 
     @Test
@@ -63,8 +64,7 @@ class MyArrayListTest {
         myArrayList.add("Anna");
         myArrayList.add("Zanna");
         myArrayList.add("Ganna");
-        int countElements = myArrayListTest.getCountElements();
-        assertEquals(3, 3);
+        assertEquals(3, myArrayListTest.getCountElements());
     }
 
 }
