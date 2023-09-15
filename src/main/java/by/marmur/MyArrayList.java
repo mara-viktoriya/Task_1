@@ -1,7 +1,6 @@
 package by.marmur;
 
 
-import java.util.Arrays;
 import java.util.Comparator;
 
 public class MyArrayList<E> {
@@ -118,8 +117,6 @@ public class MyArrayList<E> {
             array[index] = null;
         } else if (this.get(index).getClass() == element.getClass()) {
             array[index] = element;
-        } else {
-            System.out.println("Class mismatch");
         }
     }
 
@@ -163,13 +160,6 @@ public class MyArrayList<E> {
     }
 
     /**
-     * получить размер внутреннего массива
-     */
-    private int getSize() {
-        return this.array.length;
-    }
-
-    /**
      * Получить количество элементов в Листе
      */
     public int getCountElements() {
@@ -194,7 +184,8 @@ public class MyArrayList<E> {
             /*
              *разделить на подмассивы и меняем местами
              */
-            int i = low, j = high;
+            int i = low;
+            int j = high;
             while (i <= j) {
                 while (comparator.compare(border, sortArr[i]) >= 1) i++;
 

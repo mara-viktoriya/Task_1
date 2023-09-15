@@ -13,13 +13,12 @@ public class App {
         }
 
         strings2.sort((o1, o2) -> o1.length()-o2.length());
-        System.out.println("");
+        System.out.println();
         System.out.print("Sorted list: ");
         for (int i = 0; i < strings2.getCountElements(); i++) {
             System.out.print(strings2.get(i)+" ");
 
         }
-
     }
 }
 
