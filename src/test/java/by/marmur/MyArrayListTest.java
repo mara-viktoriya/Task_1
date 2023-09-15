@@ -36,14 +36,14 @@ class MyArrayListTest {
     }
 
     @Test
-    void testReplaceElement() {
+    void shouldReplaceElement() {
         myArrayList.replaceElement(0, "Next");
 
         assertEquals("Next", myArrayList.get(0));
     }
 
     @Test
-    void testRemoveElement() {
+    void shouldRemoveElement() {
         String str = myArrayList.get(0);
 
         assertEquals(str, myArrayList.removeElement(0));
@@ -57,14 +57,14 @@ class MyArrayListTest {
     }
 
     @Test
-    void testClear_CheckCountElements() {
+    void shouldClearList() {
         myArrayList.clear();
 
         assertEquals(0, myArrayList.getCountElements());
     }
 
     @Test
-    void getCountElements() {
+    void shouldReturn_CountElements() {
         assertEquals(3, myArrayList.getCountElements());
     }
 
