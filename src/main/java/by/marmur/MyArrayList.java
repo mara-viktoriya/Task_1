@@ -1,39 +1,45 @@
 package by.marmur;
 
-
 import java.util.Comparator;
 
+/**
+ *
+ * @param <E> - the type of elements in this ArrayList.
+ */
 public class MyArrayList<E> {
 
     /**
-     * стандартный размер внутреннего массива
+     * Standard initial capacity of array.
      */
     private static final int STANDARD_CAPACITY = 10;
 
     /**
-     * пустой массив
+     * Shared empty array instance. Used for empty instances.
      */
     private static final Object[] EMPTY_ARRAY = {};
 
     /**
-     * переменная хранит обект - массив
+     * The array stored the elements of the MyArrayList.
      */
     Object[] array;
 
     /**
-     * переменная хранит счетчик количества элементов в листе.
+     * The number of elements this MyArrayList contains.
      */
     private int countElements = 0;
 
     /**
-     * конструктор1. создается пустой лист
+     * Constructs an empty list with the standard initial capacity.
      */
     public MyArrayList() {
         this.array = new Object[STANDARD_CAPACITY];
     }
 
+
+
     /**
-     * конструктор2. создается пустой лист с размером внетреннего массива равного myInitialCapacity.
+     * Constructs an empty list with the capacity equal to myInitialCapacity.
+     * @param myInitialCapacity – the initial capacity of the list
      */
     public MyArrayList(int myInitialCapacity) {
         if (myInitialCapacity > 0) {
@@ -46,7 +52,7 @@ public class MyArrayList<E> {
     }
 
     /**
-     * увеличить размер внутреннего массива. Копирует старый массив в новый увеличенный массив и присваивает ссылку нового массива в array.
+     * Increases the capacity of array by standard initial capacity if the array is completely full.
      */
     private void increaseSizeArray() {
         Object[] copyArray = new Object[this.array.length + STANDARD_CAPACITY];
@@ -55,7 +61,8 @@ public class MyArrayList<E> {
     }
 
     /**
-     * проверить заполнен ли полностью массив. если массив заполнен - вызывает метод increaseSizeArray для увеличения размера массива
+     *Checks the capacity of the array. When the array is filled, increaseSizeArray method will be invoked.
+     * @param length - length of this array.
      */
     private void checkCapacity(int length) {
         if (this.countElements == length) {
@@ -65,7 +72,9 @@ public class MyArrayList<E> {
 
 
     /**
-     * Добавить элемент в конец списка.
+     * Appends the element to the end of this list.      *
+     * @param element - element to be appended to this list.
+     * @return true (as specified by Collection.add)
      */
     public boolean add(E element) {
         checkCapacity(array.length);
@@ -75,8 +84,12 @@ public class MyArrayList<E> {
 
     }
 
-    /**checkIndex
-     * Добавить элемент по индексу. смещает остальные элементы на 1 позицию.
+    /**
+     * Add the element at the specified position in this list.
+     * Shifts the elements to the right (adds one to their indices).
+     * @param element – element to be inserted
+     * @param index – index at which the specified element is to be inserted
+     * Throws:    IndexOutOfBoundsException – if the index is out of range (index < 0) || (index > (this.countElements))
      */
     public void add(E element, int index) {
         if ((index < 0) || (index > (this.countElements))) {
