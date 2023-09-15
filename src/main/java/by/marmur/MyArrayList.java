@@ -3,8 +3,12 @@ package by.marmur;
 import java.util.Comparator;
 
 /**
- *
- * @param <E> - the type of elements in this ArrayList.
+ * Resizable array.
+ * Permits all elements, including null.
+ * Provides methods to manipulate the size of the array that is used internally to store the list.
+ * Has an internal class for quick array sorting.
+ * This realization is not synchronized.
+ * @param <E> – the type of elements in this list.
  */
 public class MyArrayList<E> {
 
