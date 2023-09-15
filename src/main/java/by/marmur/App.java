@@ -1,15 +1,5 @@
 package by.marmur;
 
-
-import by.marmur.MyArrayList;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.TreeSet;
-
-/**
- * Hello world!
- */
 public class App {
     public static void main(String[] args) {
         MyArrayList<String> strings2 = new MyArrayList<>();

@@ -1,19 +1,9 @@
 package by.marmur;
 
-/* Методы:
 
-
-
-
-○ Java generics ○ Comparable, Comparator.
-Не должно быть ограничение на Comparable класс в ArrayList.
-
- */
-
-import java.util.*;
+import java.util.Comparator;
 
 public class MyArrayList<E> {
-
 
     /**
      * стандартный размер внутреннего массива
@@ -167,7 +157,6 @@ public class MyArrayList<E> {
     public void clear() {
         for (int i = 0; i < this.array.length; i++) {
             this.array[i] = null;
-
         }
         countElements = 0;
     }
@@ -188,7 +177,9 @@ public class MyArrayList<E> {
     }
 
 
-
+    /**
+     * Класс с реализацией метода быстрой сортировки
+     */
     class Quicksort {
         public void quickSort(E[] sortArr, int low, int high, Comparator<? super E> comparator) {
             /*
@@ -217,8 +208,8 @@ public class MyArrayList<E> {
                 j--;
             }
             /*
-        рекурсия для сортировки левой и правой части
-         */
+            рекурсия для сортировки левой и правой части
+            */
             if (low < j) quickSort(sortArr, low, j, comparator);
             if (high > i) quickSort(sortArr, i, high, comparator);
         }

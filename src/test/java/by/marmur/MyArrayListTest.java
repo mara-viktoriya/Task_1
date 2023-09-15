@@ -1,7 +1,5 @@
 package by.marmur;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,38 +18,37 @@ class MyArrayListTest {
     }
 
     @Test
-    void add() {
+    void testAdd_ContainsOfAddedObject(){
         myArrayList.add("New3", 3);
         assertEquals("New3", myArrayList.get(3));
     }
 
     @Test
-    void get() {
+    void testGet() {
     assertEquals("1", myArrayList.get(1));
     }
 
     @Test
-    void replaceElement() {
+    void testReplaceElement() {
                 myArrayList.replaceElement(0, "Next");
         assertEquals("Next", myArrayList.get(0));
     }
 
     @Test
-    void removeElement() {
+    void testRemoveElement() {
         String str = myArrayList.get(0);
-        myArrayList.removeElement(0);
-        assertNotEquals(str, myArrayList.get(0));
+        assertEquals(str, myArrayList.removeElement(0));
     }
 
     @Test
-    void sort() {
+    void testSort() {
 
         // тест сортировки
 
     }
 
     @Test
-    void clear() {
+    void testClear_CheckCountElements() {
         myArrayList.clear();
         assertEquals(0, myArrayList.getCountElements());
     }
@@ -60,5 +57,7 @@ class MyArrayListTest {
     void getCountElements() {
         assertEquals(3, myArrayList.getCountElements());
     }
+
+
 
 }
