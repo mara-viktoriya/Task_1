@@ -9,43 +9,35 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MyArrayListTest {
 
-    @Test
-    void add() {
-        MyArrayList<String> myArrayList = new MyArrayList<>();
+    private static MyArrayList<String> myArrayList;
+
+    @BeforeEach
+    void createNewMyArrayList (){
+        myArrayList = new MyArrayList<>();
         myArrayList.add("0");
         myArrayList.add("1");
         myArrayList.add("2");
-        myArrayList.add("New", 0);
-        assertEquals("New", myArrayList.get(0));
-        myArrayList.add("New2", 3);
-        assertEquals("New2", myArrayList.get(3));
+    }
+
+    @Test
+    void add() {
+        myArrayList.add("New3", 3);
+        assertEquals("New3", myArrayList.get(3));
     }
 
     @Test
     void get() {
-        MyArrayList<String> myArrayList = new MyArrayList<>();
-        myArrayList.add("0");
-        myArrayList.add("1");
-        myArrayList.add("2");
-        assertEquals("1", myArrayList.get(1));
+    assertEquals("1", myArrayList.get(1));
     }
 
     @Test
     void replaceElement() {
-        MyArrayList<String> myArrayList = new MyArrayList<>();
-        myArrayList.add("0");
-        myArrayList.add("1");
-        myArrayList.add("2");
-        myArrayList.replaceElement(0, "Next");
+                myArrayList.replaceElement(0, "Next");
         assertEquals("Next", myArrayList.get(0));
     }
 
     @Test
     void removeElement() {
-        MyArrayList<String> myArrayList = new MyArrayList<>();
-        myArrayList.add("0");
-        myArrayList.add("1");
-        myArrayList.add("2");
         String str = myArrayList.get(0);
         myArrayList.removeElement(0);
         assertNotEquals(str, myArrayList.get(0));
@@ -53,32 +45,19 @@ class MyArrayListTest {
 
     @Test
     void sort() {
-        MyArrayList<String> myArrayList = new MyArrayList<>();
-        myArrayList.add("0");
-        myArrayList.add("1");
-        myArrayList.add("2");
 
         // тест сортировки
-
 
     }
 
     @Test
     void clear() {
-        MyArrayList<String> myArrayList = new MyArrayList<>();
-        myArrayList.add("0");
-        myArrayList.add("1");
-        myArrayList.add("2");
         myArrayList.clear();
         assertEquals(0, myArrayList.getCountElements());
     }
 
     @Test
     void getCountElements() {
-        MyArrayList<String> myArrayList = new MyArrayList<>();
-        myArrayList.add("0");
-        myArrayList.add("1");
-        myArrayList.add("2");
         assertEquals(3, myArrayList.getCountElements());
     }
 
