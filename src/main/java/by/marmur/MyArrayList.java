@@ -189,9 +189,6 @@ public class MyArrayList<E> {
 
 
 
-
-
-
     class Quicksort {
         public void quickSort(E[] sortArr, int low, int high, Comparator<? super E> comparator) {
             /*

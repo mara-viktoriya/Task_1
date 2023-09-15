@@ -19,15 +19,8 @@ public class App {
         for (int i = 0; i < strings2.getCountElements(); i++) {
             System.out.println(strings2.get(i));
         }
-
-
-        strings2.sort(new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.length()-o2.length();
-            }
-        });
-        System.out.println("_____________________");
+        strings2.sort((o1, o2) -> o1.length()-o2.length());
+        System.out.println("Sorted list: ");
         for (int i = 0; i < strings2.getCountElements(); i++) {
             System.out.println(strings2.get(i));
 
