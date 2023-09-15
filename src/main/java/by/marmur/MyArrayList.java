@@ -75,11 +75,13 @@ public class MyArrayList<E> {
 
     }
 
-    /**
+    /**checkIndex
      * Добавить элемент по индексу. смещает остальные элементы на 1 позицию.
      */
     public void add(E element, int index) {
-        checkIndex(index);
+        if ((index < 0) || (index > (this.countElements))) {
+            throw new IndexOutOfBoundsException("Incorrect index!");
+        }
         if (index == this.countElements) {
             checkCapacity(index);
             array[index] = element;
@@ -94,18 +96,23 @@ public class MyArrayList<E> {
         }
     }
 
-    /**
+    /**checkIndex
      * получить элемент по индексу
      */
     public E get(int index) {
-        checkIndex(index);
+        if ((index < 0) || (index > (this.countElements-1))) {
+            throw new IndexOutOfBoundsException("Incorrect index!");
+        }
         return (E) array[index];
     }
 
-    /**
+    /**checkIndex
      * заменить элемент по индексу
      */
     public void replaceElement(int index, E element) {
+        if ((index < 0) || (index > (this.countElements-1))) {
+            throw new IndexOutOfBoundsException("Incorrect index!");
+        }
         if (element == null) {
             array[index] = null;
         } else if (this.get(index).getClass() == element.getClass()) {
@@ -115,11 +122,13 @@ public class MyArrayList<E> {
         }
     }
 
-    /**
+    /**!! checkIndex
      * Удалить элемент по индексу
      */
     public E removeElement(int index) {
-        checkIndex(index);
+        if ((index < 0) || (index > (this.countElements-1))) {
+            throw new IndexOutOfBoundsException("Incorrect index!");
+        }
         E element = (E) this.array[index];
 
         if (index == (array.length - 1)) {
@@ -145,11 +154,11 @@ public class MyArrayList<E> {
     /*
     Проверить валидность индекса листа.
      */
-    private void checkIndex(int index) {
-        if ((index < 0) || (index > (this.countElements + 2))) {
-            throw new IndexOutOfBoundsException("Incorrect index!");
-        }
-    }
+//    private void checkIndex(int index) {
+//        if ((index < 0) || (index > (this.countElements + 1))) {
+//            throw new IndexOutOfBoundsException("Incorrect index!");
+//        }
+//    }
 
     /**
      * Очистить всю коллекцию, колличество ячеек в массиве остается тем же.

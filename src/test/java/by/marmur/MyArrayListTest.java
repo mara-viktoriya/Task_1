@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MyArrayListTest {
 
-    private static MyArrayList<String> myArrayList;
+    private MyArrayList<String> myArrayList;
 
     @BeforeEach
-    void createNewMyArrayList (){
+    void setUp() {
         myArrayList = new MyArrayList<>();
         myArrayList.add("0");
         myArrayList.add("1");
@@ -18,19 +18,25 @@ class MyArrayListTest {
     }
 
     @Test
-    void testAdd_ContainsOfAddedObject(){
+    void shouldAdd_NewObject() {
         myArrayList.add("New3", 3);
         assertEquals("New3", myArrayList.get(3));
     }
 
     @Test
-    void testGet() {
-    assertEquals("1", myArrayList.get(1));
+    void shouldReturn_CorrectValueByGet() {
+        assertEquals("1", myArrayList.get(1));
+    }
+
+    @Test()
+    public void shouldThrow_WhenIndexOutOfBounds() {
+        assertThrows(IndexOutOfBoundsException.class, () -> myArrayList.get(5));
+
     }
 
     @Test
     void testReplaceElement() {
-                myArrayList.replaceElement(0, "Next");
+        myArrayList.replaceElement(0, "Next");
         assertEquals("Next", myArrayList.get(0));
     }
 
@@ -57,7 +63,6 @@ class MyArrayListTest {
     void getCountElements() {
         assertEquals(3, myArrayList.getCountElements());
     }
-
 
 
 }
