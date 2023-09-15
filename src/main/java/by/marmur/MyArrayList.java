@@ -89,7 +89,7 @@ public class MyArrayList<E> {
      * Shifts the elements to the right (adds one to their indices).
      * @param element – element to be inserted
      * @param index – index at which the specified element is to be inserted
-     * Throws:    IndexOutOfBoundsException – if the index is out of range (index < 0) || (index > (this.countElements))
+     * @throws IndexOutOfBoundsException – if the index is out of range (index < 0) || (index > (this.countElements))
      */
     public void add(E element, int index) {
         if ((index < 0) || (index > (this.countElements))) {
@@ -109,8 +109,11 @@ public class MyArrayList<E> {
         }
     }
 
-    /**checkIndex
-     * получить элемент по индексу
+    /**
+     * Returns the element at the specified position in this list.
+     * @param index – index of the element to return
+     * @return the element at the specified position in this list
+     * @throws IndexOutOfBoundsException – if the index is out of range (index < 0) || (index > (this.countElements-1))
      */
     public E get(int index) {
         if ((index < 0) || (index > (this.countElements-1))) {
@@ -119,8 +122,11 @@ public class MyArrayList<E> {
         return (E) array[index];
     }
 
-    /**checkIndex
-     * заменить элемент по индексу
+    /**
+     * * Replaces the element at the specified position in this list with the specified element.
+     * @param index - index of the element to replace
+     * @param element - element to be stored at the specified position
+     * @throws IndexOutOfBoundsException – if the index is out of range (index < 0) || (index > (this.countElements-1))
      */
     public void replaceElement(int index, E element) {
         if ((index < 0) || (index > (this.countElements-1))) {
@@ -133,8 +139,11 @@ public class MyArrayList<E> {
         }
     }
 
-    /**checkIndex
-     * Удалить элемент по индексу
+    /**
+     * Removes the element at the specified position in this list. Shifts any subsequent elements to the left (subtracts one from their indices).
+     * @param index – the index of the element to be removed
+     * @return the element that was removed from the list
+     * @throws IndexOutOfBoundsException – if the index is out of range (index < 0) || (index > (this.countElements-1))
      */
     public E removeElement(int index) {
         if ((index < 0) || (index > (this.countElements-1))) {
@@ -156,14 +165,15 @@ public class MyArrayList<E> {
     }
 
     /**
-     * Отсортировать массив методом быстрой сортировки. Принимает в качестве аргумента объект Comparator
+     * Sort the array using quicksort method from inner class Quicksort.
+     * @param comparator object for comparing objects
      */
     public void sort(Comparator<? super E> comparator) {
         new Quicksort().quickSort((E[]) this.array, 0, this.countElements- 1, comparator);
     }
 
     /**
-     * Очистить всю коллекцию, колличество ячеек в массиве остается тем же.
+     * Removes all of the elements from this list.
      */
     public void clear() {
         for (int i = 0; i < this.array.length; i++) {
@@ -173,14 +183,15 @@ public class MyArrayList<E> {
     }
 
     /**
-     * Получить количество элементов в Листе
+     * Get the number of elements in this list.
+     * @return the number of elements.
      */
     public int getCountElements() {
         return this.countElements;
     }
 
     /**
-     * Класс с реализацией метода быстрой сортировки
+     * Inner class with realization of quicksort method.
      */
     class Quicksort {
         public void quickSort(E[] sortArr, int low, int high, Comparator<? super E> comparator) {
