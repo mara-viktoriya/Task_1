@@ -166,7 +166,7 @@ public class MyArrayList<E> {
 
     /**
      * Sort the array using quicksort method from inner class Quicksort.
-     * @param comparator object for comparing objects
+     * @param comparator - object for comparing objects
      */
     public void sort(Comparator<? super E> comparator) {
         new Quicksort().quickSort((E[]) this.array, 0, this.countElements- 1, comparator);
@@ -194,20 +194,18 @@ public class MyArrayList<E> {
      * Inner class with realization of quicksort method.
      */
     class Quicksort {
-        public void quickSort(E[] sortArr, int low, int high, Comparator<? super E> comparator) {
-            /*
-             *завершить,если массив пуст или уже нечего делить
-             */
-            if (sortArr.length == 0 || low >= high) return;
 
-            /*
-             *выбор опорного элемента
-             */
+        /**
+         * Sort the array using quicksort.
+         * @param sortArr - the array for sorting
+         * @param low - minimum left array cell for sorting
+         * @param high - maximum right array cell for sorting
+         * @param comparator - object storing rules for comparing objects
+         */
+        public void quickSort(E[] sortArr, int low, int high, Comparator<? super E> comparator) {
+            if (sortArr.length == 0 || low >= high) return;
             int middle = low + (high - low) / 2;
             E border = sortArr[middle];
-            /*
-             *разделить на подмассивы и меняем местами
-             */
             int i = low;
             int j = high;
             while (i <= j) {
@@ -221,9 +219,6 @@ public class MyArrayList<E> {
                     j--;
                 }
             }
-            /*
-            рекурсия для сортировки левой и правой части
-            */
             if (low < j) quickSort(sortArr, low, j, comparator);
             if (high > i) quickSort(sortArr, i, high, comparator);
         }
